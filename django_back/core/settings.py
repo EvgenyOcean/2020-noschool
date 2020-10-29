@@ -38,8 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # internal
+    'rooms.apps.RoomsConfig',
+    'users.apps.UsersConfig',
+
     # external
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
 ]
 
@@ -123,9 +128,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Telling rest framework that token authentication will be used
+# And according to this, it should check for a token to determine if 
+# a user is authenticated
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
